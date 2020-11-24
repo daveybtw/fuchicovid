@@ -24,7 +24,6 @@ export class DoctoresService {
         newDoctor.fecha_registro = dd + '/' + mm + '/' + yyyy;
 
         var doctorCreado = this.doctoresRepository.save(newDoctor);
-        console.log(doctorCreado)
     }
 
     public async findDoctor(documento: number): Promise<any>{

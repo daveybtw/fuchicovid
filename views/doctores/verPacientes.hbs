@@ -58,9 +58,6 @@
             ¡Bienvenido nuevamente!
           </div>
           <div class = "div-left-menu-header-bottom">
-            {{ message.usuario.pnombre_persona }}
-            {{ message.usuario.snombre_persona }}
-            {{ message.usuario.papellido_persona }}
           </div>
           
         </div>
@@ -92,7 +89,7 @@
             <th> Direccion de residencia </th>
             <th> Parientes </th>
           </tr>
-          {{#each message.array }}
+          {{#each message }}
           <tr style = "text-align: center;">
             <td contenteditable = "true">{{ id_paciente }} </td>
             <td contenteditable = "true">{{ tipo_id }} </td>

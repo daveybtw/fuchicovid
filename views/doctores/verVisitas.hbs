@@ -90,19 +90,19 @@
         
         <table>
           <tr>
-            <th> Temperatura </th>
-            <th> Presion </th>
             <th> Identificacion paciente </th>
             <th> Identificacion doctor </th>
+            <th> Temperatura </th>
+            <th> Presion </th>
             <th> Fecha de la visita </th>
             <th> Observaciones </th>
           </tr>
-          {{#each message.array }}
+          {{#each message.visitas }}
           <tr style = "text-align: center;">
-            <td contenteditable = "true">{{ temperatura_paciente }} </td>
-            <td contenteditable = "true">{{ presion_paciente }} </td>
             <td contenteditable = "true">{{ id_paciente }} </td>
             <td contenteditable = "true">{{ id_doctor }} </td>
+            <td contenteditable = "true">{{ temperatura_paciente }} </td>
+            <td contenteditable = "true">{{ presion_paciente }} </td>
             <td contenteditable = "true">{{ fecha_visita }} </td>
             <td><i style = "color: DodgerBlue; cursor: pointer;" class = "fa fa-search-plus" onclick = "openPop('{{ nombre_paciente }}', '{{ nombre_doctor }} ', ' {{ temperatura_paciente }} ', '{{ presion_paciente }}', '{{ fecha_visita }}' ,'{{ observacion }}')"></i> </td>
           </tr>

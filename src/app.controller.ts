@@ -71,7 +71,8 @@ export class AppController {
     @Render('doctores/verVisitas')
     async getUser(@Request() req){
         var datosUser = await this.datosServicio.findDatosById(req.user.id_persona);
-        const visitaServicio = await this.visitaServicio.findVisitaDoctor(req.user.id_persona);
+        const visitaServicio = await this.visitaServicio.findVisitaDoctor(1005890893);
+        console.log(visitaServicio);
         var arrayObservaciones = [];
         var arrayCompuesto = [];
         for(var i = 0; i < visitaServicio.length; i++){
@@ -79,6 +80,7 @@ export class AppController {
             var datosPaciente = await this.datosServicio.findDatosById(visitaServicio[i].id_paciente);
             var datosDoctor = await this.datosServicio.findDatosById(visitaServicio[i].id_doctor);
             var arraySimple = [];
+            
             arraySimple["temperatura_paciente"] = visitaServicio[i].temperatura_paciente;
             arraySimple["presion_paciente"] = visitaServicio[i].presion_paciente;
             arraySimple["id_paciente"] = visitaServicio[i].id_paciente;
@@ -91,7 +93,7 @@ export class AppController {
         }
         arrayCompuesto["usuario"] = datosUser[0];
         arrayCompuesto["visitas"] = arrayObservaciones;
-
+        console.log(arrayObservaciones);
         return { message: arrayCompuesto};
     }
     // :::::::::::::::::::::::::::::::::
@@ -122,7 +124,7 @@ export class AppController {
     @Get('doctor/paciente')
     @Render('doctores/verPacientes')
     async verPacientes(@Request() req){
-      var datosUser = await this.datosServicio.findDatosById(req.user.id_persona);
+      var datosUser = await this.datosServicio.findDatosById(1005890893);
       var pacienteArray = await this.pacienteServicio.findPaciente(req.user.id_persona);
       
       var arrayPaciente = [];
