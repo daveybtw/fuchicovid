@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+    <link rel = "stylesheet" href = "/css/divs.css">
+    <link rel = "stylesheet" href = "/css/visita.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <!--- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
+    <script>
+      function hidePop(){
+        document.getElementById("pop").style.display = "none";
+      }
+
+      function openPop(parentesco){
+        document.getElementById("n_parentesco").innerHTML = observacion;
+      }
+
+      function findPaciente(){
+        findPac(document.getElementById("paciente_id").value);
+      }
+
+      var openOrClose = 0;
+
+      function openNav(){
+        if(openOrClose == 0){
+          document.getElementById("div-left-menu").style.width = "0%";
+          document.getElementById("div-left-menu").style.display = "none";
+          document.getElementById("div-right-content").style.width = "100%";
+          document.getElementById("div-right-content").style.marginLeft = "0%";
+          openOrClose = 1;
+        } else {
+          document.getElementById("div-left-menu").style.width = "20%";
+          document.getElementById("div-left-menu").style.display = "block";
+          document.getElementById("div-right-content").style.width = "80%";
+          document.getElementById("div-right-content").style.marginLeft = "20%";
+          openOrClose = 0;
+        }
+
+      function validateForm() {
+        var x = document.forms["searchForm"]["paciente_id"].value;
+        if (x == "") {
+          alert("Name must be filled out");
+          return false;
+        }
+      }
+        
+      }
+    </script>
+    <!--- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->
+    <div class = "div-left-menu" id = "div-left-menu">
+      <div class = "div-left-menu-header">
+        <div class = "div-left-menu-header-info">
+          <div class = "div-left-menu-header-top">
+            ¡Bienvenido nuevamente!
+          </div>
+          <div class = "div-left-menu-header-bottom">
+            {{ message.usuario.pnombre_persona }}
+            {{ message.usuario.snombre_persona }}
+            {{ message.usuario.papellido_persona }}
+          </div>
+          
+        </div>
+      </div>
+      <div class = "div-left-menu-body">
+        <ul>
+          <li><a href = ""> <i class="fa fa-home"></i> Menu principal </a></li>
+          <li><a href = "/doctor/visitas"><i class="fa fa-book"></i> Visitas medicas </a></li>
+        </ul>
+      </div>
+    </div>
+    <div class = "div-right-content" id = "div-right-content">
+      <button onclick = "openNav();" class = "btn" ><i class="fa fa-bars"></i></button>
+      <div class = "div-table">
+        
+        <form name = "searchForm" method = "POST" action = "/doctor/paciente" onsubmit="return validateForm()" required>
+          <input type = "text" placeholder = "Buscar por identificacion del paciente" name = "paciente_id">
+          <input type = "submit" class = "button" value = "Buscar por paciente">
+          <input type = "submit" class = "button" value = "Buscar por doctor" formaction = "/doctor/visitas" formmethod="GET">
+        </form>
+        
+        <table>
+          <tr>
+            <th> ID del Paciente </th>
+            <th> Tipo de identificacion </th>
+            <th> Nombre paciente </th>
+            <th> Doctor a cargo </th>
+            <th> Telefonos de emergencia</th>
+            <th> Direccion de residencia </th>
+            <th> Parientes </th>
+          </tr>
+          {{#each message.array }}
+          <tr style = "text-align: center;">
+            <td contenteditable = "true">{{ id_paciente }} </td>
+            <td contenteditable = "true">{{ tipo_id }} </td>
+            <td contenteditable = "true">{{ nombre_paciente }} </td>
+            <td contenteditable = "true">{{ nombre_doctor }} </td>
+            <td contenteditable = "true">{{ telefonos_emergencia }} </td>
+            <td contenteditable = "true">{{ direccion_residencia }} </td>
+
+          <td><i style = "color: DodgerBlue; cursor: pointer;" class = "fa fa-search-plus" onclick = "openPop(' {{ n_parentesco }} ')"></i> </td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+
+      <div class = "div-overlay-background" id = "pop" style = "display: none;">  
+        <div class = "div-overlay-content">
+          <h1>Parientes del paciente</h1>
+          <p><b>Nombre y parentesco </b>
+          <span id = "n_parentesco">nombre </span></p>
+          
+
+          <button onclick = "hidePop();" class = "button"> Cerrar detalles </button>
+        </div>
+      </div>
+    </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  </body>
+</html>
